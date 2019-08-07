@@ -6,3 +6,10 @@
 .priority{
 	color: orange !important;
 }
+
+.add-item-from {
+	display: inline-block;
+	padding: 10px;
+	margin: 10px;
+	border: 1px solid black;
+}
