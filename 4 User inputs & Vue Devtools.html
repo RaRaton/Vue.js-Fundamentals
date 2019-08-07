@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shopping List App</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div id="shopping-list">
+		<h1>{{ header.toLocaleUpperCase() }}</h1>
+		<input v-model="newItem" type="text" placeholder="Add an item">
+		<ul>
+			<li v-for="item in items">{{ item }}</li>
+		</ul>
+
+		<p><i>Install Vue Devtools plugin for Chrome to be able to interact and debug our Vue objects</i></p>
+	</div>
+	<script src="https://unpkg.com/vue"></script>	
+	<script type="text/javascript">
+		var shoppingList = new Vue({
+			el: '#shopping-list',
+			data: {
+				header: 'Shopping List App',
+				newItem: '',
+				items: [
+					'10 partty hats',
+					'2 board games',
+					'20 cups'
+				]
+			}
+		});
+	</script>
+</body>
+</html>

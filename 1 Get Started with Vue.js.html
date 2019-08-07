@@ -1,0 +1,23 @@
+<!DOCTYPE html>`
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shopping List App</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div id="shopping-list">
+		<h1>{{ header ? header : 'Welcome' }}</h1>
+		<input type="text" name="inputText" v-model="header">
+	</div>
+	<script src="https://unpkg.com/vue"></script>	
+	<script type="text/javascript">
+		var shoppingList = new Vue({
+			el: '#shopping-list',
+			data: {
+				header: 'Vue is ready for Party!'
+			}
+		});
+	</script>
+</body>
+</html>

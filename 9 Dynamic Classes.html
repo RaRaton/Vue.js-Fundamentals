@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Shopping List App</title>
+	<link rel="stylesheet" href="main.css">
+</head>
+<body>
+	<div id="shopping-list">
+		<div class="header">
+			<h1>{{ header.toLocaleUpperCase() }}</h1>
+			<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Edit List</button>	
+			<button v-else class="btn btn-cancel" @click="changeState('default')">Cancel</button>	
+		</div>
+		
+		<div v-if="state === 'edit'" class="add-item-from">
+			<input v-model="newItem" type="text" placeholder="Add an item" @keyup.enter="saveItem">
+			<button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem">Save Item</button>
+			<ul>
+				<!-- Can be modified using array notation: Simple for multiple changes-->
+				<li v-for="item in items" :class="[item.purchased? 'strikeout':'', item.highPriority? 'priority':'']" @click="togglePurchased(item)">{{ item.label }}</li>
+				<!-- Or use object syntax
+					<li v-for="item in items" :class="{strikeout:item.purchased, priority:item.highPriority}" @click="togglePurchased(item)">{{ item.label }}</li>	
+					We can one or mode properties to class using object syntax and add other property to class always like here with priority:
+					<li v-for="item in items" :class="{strikeout:item.purchased, priority:item}" @click="togglePurchased(item)">{{ item.label }}</li>
+				-->				
+			</ul>
+		</div>
+
+		<p v-if="items.length === 0">Nice job! You have bought all your items.</p>
+		<p><i>Install Vue Devtools plugin for Chrome to be able to interact and debug our Vue instaces</i></p>
+	</div>
+	<script src="https://unpkg.com/vue"></script>	
+	<script type="text/javascript">
+		var shoppingList = new Vue({
+			el: '#shopping-list',
+			data: {
+				state: 'default',
+				header: 'Shopping List App',
+				newItem: '',
+				items: [
+					{ 
+						label:     '10 partty hats',
+						purchased: false,
+						highPriority: false
+					},
+					{ 				
+						label:     '2 board games',
+						purchased: true,
+						highPriority: true
+					},
+					{ 				
+						label:     '20 cups',
+						purchased: false,
+						highPriority: true
+					}
+				]
+			},
+			methods: {
+				saveItem: function(){
+					this.items.push({ label: this.newItem, purchased: false, highPriority: false});
+					this.newItem = '';
+				},
+				changeState: function(newState){
+					this.state = newState;
+					this.newItem = '';
+				},
+				togglePurchased: function(item){
+					item.purchased = !item.purchased;
+				}
+
+			}
+		});
+	</script>
+</body>
+</html>
